@@ -37,9 +37,6 @@ case "run", "daemon":
     // Apply hardware mappings
     _ = HIDHardware.applyMappings(config: config)
     
-    // Configure system symbolic hotkeys for WindowServer screenshot integration
-    _ = HIDHardware.configureSystemSymbolicHotkeys()
-    
     // Start listeners
     HotKeyManager.shared.start(config: config)
     ConsumerListener.shared.start(config: config)
@@ -80,7 +77,7 @@ case "status":
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
     p.waitUntilExit()
     let out = String(data: data, encoding: .utf8) ?? ""
-    let isDaemonRunning = out.contains("com.muzamil.k330d")
+    let isDaemonRunning = out.contains("com.local.k330d")
     print("Service (Launchd):   \(isDaemonRunning ? "✓ Running" : "○ Not loaded / Stopped")")
 
     print("\nConfiguration:")

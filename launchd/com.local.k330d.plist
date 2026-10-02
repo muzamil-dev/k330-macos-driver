@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.muzamil.k330d</string>
+    <string>com.local.k330d</string>
     <key>ProgramArguments</key>
     <array>
         <string>/Users/muzamil/.local/bin/k330d</string>

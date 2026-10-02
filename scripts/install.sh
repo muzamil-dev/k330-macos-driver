@@ -25,16 +25,16 @@ cp -f "$DIR"/build/k330d "$BIN_DIR"/k330d
 ln -sf "$BIN_DIR"/k330d "$BIN_DIR"/k330-driver
 
 echo "==> Installing LaunchAgent..."
-cp -f "$DIR"/launchd/com.muzamil.k330d.plist "$AGENT_DIR"/com.muzamil.k330d.plist
+cp -f "$DIR"/launchd/com.local.k330d.plist "$AGENT_DIR"/com.local.k330d.plist
 
 # Unload if currently loaded
-launchctl bootout gui/$(id -u)/com.muzamil.k330d 2>/dev/null || true
-launchctl unload "$AGENT_DIR"/com.muzamil.k330d.plist 2>/dev/null || true
+launchctl bootout gui/$(id -u)/com.local.k330d 2>/dev/null || true
+launchctl unload "$AGENT_DIR"/com.local.k330d.plist 2>/dev/null || true
 
 # Load service
 echo "==> Starting k330d background service..."
-launchctl bootstrap gui/$(id -u) "$AGENT_DIR"/com.muzamil.k330d.plist 2>/dev/null || \
-launchctl load "$AGENT_DIR"/com.muzamil.k330d.plist
+launchctl bootstrap gui/$(id -u) "$AGENT_DIR"/com.local.k330d.plist 2>/dev/null || \
+launchctl load "$AGENT_DIR"/com.local.k330d.plist
 
 # Apply immediate mappings
 echo "==> Applying immediate hardware mappings..."

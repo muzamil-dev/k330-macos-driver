@@ -138,15 +138,12 @@ public class HIDHardware {
             inPipe.fileHandleForWriting.closeFile()
             importTask.waitUntilExit()
 
-            // Notify WindowServer and OS settings daemon
-            let activate = "/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings"
-            if FileManager.default.fileExists(atPath: activate) {
-                let actTask = Process()
-                actTask.executableURL = URL(fileURLWithPath: activate)
-                actTask.arguments = ["-u"]
-                try? actTask.run()
-                actTask.waitUntilExit()
-            }
+            // Notify system preferences daemon
+            let killTask = Process()
+            killTask.executableURL = URL(fileURLWithPath: "/usr/bin/killall")
+            killTask.arguments = ["cfprefsd"]
+            try? killTask.run()
+            killTask.waitUntilExit()
 
             print("[k330d] Configured macOS system screenshot symbolic hotkeys.")
             return true

@@ -27,7 +27,7 @@ A native, zero-bloat macOS background driver and companion utility designed spec
 - 🔄 **Auto-Reconnect & Sleep/Wake Persistence**:
   - Automatically re-applies hardware mappings whenever the Mac wakes from sleep or the USB receiver is replugged.
 - 🚀 **Native Swift Background Service**:
-  - Managed via `launchd` LaunchAgent (`com.muzamil.k330d`). Runs seamlessly at login with zero CPU overhead.
+  - Managed via `launchd` LaunchAgent (`com.local.k330d`). Runs seamlessly at login with zero CPU overhead.
 
 ---
 
@@ -85,4 +85,4 @@ If you ever want to swap Alt and Windows keys (so the physical Alt key next to t
 2. **System Layer (`com.apple.symbolichotkeys`)**:
    Hooks `F13` into macOS WindowServer Key 29 (full-screen screenshot to clipboard) and `Shift+F13` into Key 31 (region screenshot to clipboard) for native performance.
 3. **Daemon Layer (`k330d`)**:
-   Runs as an Aqua LaunchAgent (`~/Library/LaunchAgents/com.muzamil.k330d.plist`). Captures Carbon global hotkeys for F13/F14/F15, posts synthetic `Cmd+C` / `Cmd+V`, plays audio feedback, and monitors `IOHIDManager` for multimedia controls and device reconnection.
+   Runs as an Aqua LaunchAgent (`~/Library/LaunchAgents/com.local.k330d.plist`). Captures Carbon global hotkeys for F13/F14/F15, posts synthetic `Cmd+C` / `Cmd+V`, plays audio feedback, and monitors `IOHIDManager` for multimedia controls and device reconnection.
