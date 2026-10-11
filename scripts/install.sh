@@ -7,6 +7,7 @@ AGENT_DIR="$HOME/Library/LaunchAgents"
 LOG_DIR="$HOME/Library/Logs"
 
 mkdir -p "$BIN_DIR" "$AGENT_DIR" "$LOG_DIR"
+mkdir -p "$DIR/build"
 
 echo "==> Building Logitech K330 macOS Driver..."
 swiftc \
@@ -20,12 +21,16 @@ swiftc \
     -o "$DIR"/build/k330d
 
 echo "==> Installing binary to $BIN_DIR/k330d..."
-mkdir -p "$DIR/build"
 cp -f "$DIR"/build/k330d "$BIN_DIR"/k330d
+chmod 755 "$BIN_DIR"/k330d
 ln -sf "$BIN_DIR"/k330d "$BIN_DIR"/k330-driver
 
 echo "==> Installing LaunchAgent..."
-cp -f "$DIR"/launchd/com.local.k330d.plist "$AGENT_DIR"/com.local.k330d.plist
+sed \
+    -e "s|__K330_BIN__|$BIN_DIR/k330d|g" \
+    -e "s|__K330_LOG_DIR__|$LOG_DIR|g" \
+    "$DIR"/launchd/com.local.k330d.plist \
+    > "$AGENT_DIR"/com.local.k330d.plist
 
 # Unload if currently loaded
 launchctl bootout gui/$(id -u)/com.local.k330d 2>/dev/null || true

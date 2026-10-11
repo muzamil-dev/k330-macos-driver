@@ -106,12 +106,22 @@ public class DiagnosticTester {
             case 0x19E: desc = "Lock PC"
             case 0x1A2: desc = "App Switcher"
             case 0x18B, 0x230: desc = "Show Desktop"
+            case 0xB0: desc = "Play"
+            case 0xB1: desc = "Pause"
+            case 0xB3: desc = "Fast Forward"
+            case 0xB4: desc = "Rewind"
             case 0xCD: desc = "Play/Pause"
             case 0xB5: desc = "Next Track"
             case 0xB6: desc = "Previous Track"
+            case 0xB7: desc = "Stop"
             case 0xE2: desc = "Mute"
             case 0xE9: desc = "Volume Up"
             case 0xEA: desc = "Volume Down"
+            case 0x221: desc = "Search"
+            case 0x224: desc = "Browser Back"
+            case 0x225: desc = "Browser Forward"
+            case 0x227: desc = "Browser Refresh"
+            case 0x22A: desc = "Bookmarks"
             default: break
             }
 

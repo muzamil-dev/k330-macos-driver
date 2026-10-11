@@ -7,6 +7,16 @@ public class ActionPerformer {
     public static let shared = ActionPerformer()
     private var shutterSound: NSSound?
 
+    public enum MediaKey: UInt32 {
+        case soundUp = 0
+        case soundDown = 1
+        case mute = 7
+        case play = 16
+        case next = 17
+        case previous = 18
+        case stop = 19
+    }
+
     init() {
         let soundPath = "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Screen Capture.aif"
         if FileManager.default.fileExists(atPath: soundPath) {
@@ -115,6 +125,68 @@ public class ActionPerformer {
             up.post(tap: .cghidEventTap)
             print("[k330d] Executed Show Desktop (F11)")
         }
+    }
+
+    public func performMediaKey(_ key: MediaKey) {
+        let source = CGEventSource(stateID: .hidSystemState)
+        let data1 = Int64(key.rawValue << 16 | 0xA00)
+
+        guard let down = CGEvent(
+            mouseEventSource: source,
+            mouseType: .otherMouseDown,
+            mouseCursorPosition: .zero,
+            mouseButton: .left
+        ), let up = CGEvent(
+            mouseEventSource: source,
+            mouseType: .otherMouseUp,
+            mouseCursorPosition: .zero,
+            mouseButton: .left
+        ) else {
+            print("[k330d] Failed to create media key event \(key).")
+            return
+        }
+
+        down.type = CGEventType(rawValue: 14)!
+        up.type = CGEventType(rawValue: 14)!
+        down.setIntegerValueField(CGEventField(rawValue: 1)!, value: data1)
+        up.setIntegerValueField(CGEventField(rawValue: 1)!, value: data1)
+        down.setIntegerValueField(CGEventField(rawValue: 2)!, value: -1)
+        up.setIntegerValueField(CGEventField(rawValue: 2)!, value: 0)
+        down.post(tap: .cghidEventTap)
+        up.post(tap: .cghidEventTap)
+    }
+
+    public func performBrowserBack() {
+        performKeyCombo(keyCode: 0x7B, flags: .maskCommand)
+    }
+
+    public func performBrowserForward() {
+        performKeyCombo(keyCode: 0x7C, flags: .maskCommand)
+    }
+
+    public func performBrowserRefresh() {
+        performKeyCombo(keyCode: 0x0F, flags: .maskCommand)
+    }
+
+    public func performSearch() {
+        performKeyCombo(keyCode: 0x0C, flags: .maskCommand)
+    }
+
+    public func performFavorites() {
+        performKeyCombo(keyCode: 0x2F, flags: [.maskCommand, .maskAlternate])
+    }
+
+    private func performKeyCombo(keyCode: CGKeyCode, flags: CGEventFlags) {
+        let source = CGEventSource(stateID: .hidSystemState)
+        guard let down = CGEvent(keyboardEventSource: source, virtualKey: keyCode, keyDown: true),
+              let up = CGEvent(keyboardEventSource: source, virtualKey: keyCode, keyDown: false) else {
+            print("[k330d] Failed to create keyboard event for key code \(keyCode).")
+            return
+        }
+        down.flags = flags
+        up.flags = flags
+        down.post(tap: .cghidEventTap)
+        up.post(tap: .cghidEventTap)
     }
 
     public func launchEmail() {

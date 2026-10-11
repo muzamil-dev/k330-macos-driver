@@ -13,7 +13,7 @@ build:
 		-O \
 		-o build/k330d
 
-install: build
+install:
 	@./scripts/install.sh
 
 uninstall:

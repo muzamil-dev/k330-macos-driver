@@ -74,6 +74,36 @@ public class ConsumerListener {
             ActionPerformer.shared.performAppSwitch()
         case 0x18B, 0x230: // Show Desktop
             ActionPerformer.shared.performShowDesktop()
+        case 0xB0: // Play
+            ActionPerformer.shared.performMediaKey(.play)
+        case 0xB1, 0xCD: // Pause / Play-Pause
+            ActionPerformer.shared.performMediaKey(.play)
+        case 0xB3: // Fast Forward
+            ActionPerformer.shared.performMediaKey(.next)
+        case 0xB4: // Rewind
+            ActionPerformer.shared.performMediaKey(.previous)
+        case 0xB5: // Scan Next Track
+            ActionPerformer.shared.performMediaKey(.next)
+        case 0xB6: // Scan Previous Track
+            ActionPerformer.shared.performMediaKey(.previous)
+        case 0xB7: // Stop
+            ActionPerformer.shared.performMediaKey(.stop)
+        case 0xE2: // Mute
+            ActionPerformer.shared.performMediaKey(.mute)
+        case 0xE9: // Volume Increment
+            ActionPerformer.shared.performMediaKey(.soundUp)
+        case 0xEA: // Volume Decrement
+            ActionPerformer.shared.performMediaKey(.soundDown)
+        case 0x221: // AL Search
+            ActionPerformer.shared.performSearch()
+        case 0x224: // AC Back
+            ActionPerformer.shared.performBrowserBack()
+        case 0x225: // AC Forward
+            ActionPerformer.shared.performBrowserForward()
+        case 0x227: // AC Refresh
+            ActionPerformer.shared.performBrowserRefresh()
+        case 0x22A: // AC Bookmarks
+            ActionPerformer.shared.performFavorites()
         default:
             break
         }

@@ -21,7 +21,8 @@ A native, zero-bloat macOS background driver and companion utility designed spec
   - **Show Desktop**: Toggles Show Desktop / Mission Control.
   - **Switch Applications**: Triggers macOS Application Switcher (`Command + Tab`).
   - **Lock PC**: Locks your Mac screen immediately.
-  - **Media Controls**: Volume Up/Down, Mute, Play/Pause, Next/Previous track.
+  - **Media Controls**: Volume Up/Down, Mute, Play/Pause, Stop, Fast Forward, Rewind, Next/Previous track.
+  - **Browser Controls**: Search, Back, Forward, Refresh, and Bookmarks.
 - ⚡ **Zero-Latency Kernel-Level Remapping**:
   - Uses Apple's native `hidutil` targeting only the Logitech receiver ID (`VendorID: 1133, ProductID: 50475`). Built-in Mac keyboards remain 100% untouched.
 - 🔄 **Auto-Reconnect & Sleep/Wake Persistence**:

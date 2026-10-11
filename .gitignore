@@ -1,0 +1,7 @@
+.DS_Store
+build/
+
+# Per-user configuration and installed LaunchAgent files
+.config/
+*.log
+*.err

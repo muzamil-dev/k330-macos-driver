@@ -6,7 +6,7 @@
     <string>com.local.k330d</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/muzamil/.local/bin/k330d</string>
+        <string>__K330_BIN__</string>
         <string>run</string>
     </array>
     <key>RunAtLoad</key>
@@ -16,8 +16,8 @@
     <key>ProcessType</key>
     <string>Interactive</string>
     <key>StandardOutPath</key>
-    <string>/Users/muzamil/Library/Logs/k330d.log</string>
+    <string>__K330_LOG_DIR__/k330d.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/muzamil/Library/Logs/k330d.err</string>
+    <string>__K330_LOG_DIR__/k330d.err</string>
 </dict>
 </plist>
